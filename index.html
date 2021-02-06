@@ -49,7 +49,7 @@
         
         //api function
         function api(input){
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=807bf4fe5cb31ea429d15a27f963d715`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=807bf4fe5cb31ea429d15a27f963d715`)
         .then(res=>res.json())
         .then(data=>{
             display(data)
