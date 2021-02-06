@@ -36,41 +36,7 @@
         </div>
     </div>
 
-    <script>
-        //search btn function
-           document.getElementById('search').addEventListener('click',function(){
-          const input =document.getElementById('city-input').value
-          if(input===""){
-              alert('please Input The City Name')
-          }
-          api(input)
-        
-        })
-        
-        //api function
-        function api(input){
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=807bf4fe5cb31ea429d15a27f963d715`)
-        .then(res=>res.json())
-        .then(data=>{
-            display(data)
-        })
-    }
-
- 
-
-    //show function
-        function display(data){
-            console.log(data)
-            const temp=parseFloat(data.main.temp);
-            const temperature=temp-273.15
-            document.getElementById('temperature').innerHTML=temperature.toFixed(2)
-            document.getElementById('weather-condition').innerHTML=data.weather[0].main
-            document.getElementById('city').innerHTML=data.name
-            document.getElementById('city-input').value=""
-        }
-      
-        
-    </script>
+    
 
 </body>
 
