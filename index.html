@@ -30,45 +30,54 @@
         </form>
         <div class="weather-status text-white text-center">
             <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
-            <h1 id="city">Dhaka</h1>
-            <h3><span id="temperature">38.06</span>&deg;C</h3>
+            <h1 id="city"></h1>
+            <h3><span id="temperature"></span>&deg;C</h3>
             <h1 class="lead" id="weather-condition">Clouds</h1>
         </div>
     </div>
 
     <script>
         //search btn function
-           document.getElementById('search').addEventListener('click',function(){
+         
+        
+      
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=Mymensingh&appid=807bf4fe5cb31ea429d15a27f963d715')
+        .then(res=>res.json())
+        .then(data=>{
+           display(data)
+            
+        })
+  
+
+
+        document.getElementById('search').addEventListener('click',function(){
           const input =document.getElementById('city-input').value
           if(input===""){
               alert('please Input The City Name')
           }
-          api(input)
+          fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=807bf4fe5cb31ea429d15a27f963d715`)
+          .then(res=>res.json())
+          .then(data=>{
+              display(data)
+          })
+          .catch(error=>{
+             console.log(error)
+          })
+         
         
         })
-        
-        //api function
-        function api(input){
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=807bf4fe5cb31ea429d15a27f963d715`)
-        .then(res=>res.json())
-        .then(data=>{
-            display(data)
-        })
-    }
 
- 
-
-    //show function
+    
         function display(data){
-            console.log(data)
-            const temp=parseFloat(data.main.temp);
+        const temp=parseFloat(data.main.temp);
             const temperature=temp-273.15
             document.getElementById('temperature').innerHTML=temperature.toFixed(2)
             document.getElementById('weather-condition').innerHTML=data.weather[0].main
             document.getElementById('city').innerHTML=data.name
             document.getElementById('city-input').value=""
-        }
-      
+
+    }
+
         
     </script>
 
